@@ -15,16 +15,22 @@ public class CreditCalc {
         return loanAmount;
     }
 
+    public double calculateAnnuity() {
+        double monthlyPercent = interestRate / 12;
+        return (monthlyPercent * Math.pow((1 + monthlyPercent), loanTerm)) /
+                (Math.pow((1 + monthlyPercent), loanTerm) - 1);
+    }
 
     public double monthlyPayment() {
-        return 0.00;
+
+        return loanAmount * calculateAnnuity();
     }
 
     public double fullCostOfTheLoan() {
-        return 0.00;
+        return monthlyPayment() * loanTerm;
     }
 
     public double overpaymentForTheEntirePeriod() {
-        return 0.00;
+        return fullCostOfTheLoan() - loanAmount;
     }
 }
